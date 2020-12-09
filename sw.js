@@ -1,4 +1,4 @@
-const cacheName = 'fast-products-v2';
+const cacheName = 'fast-products-v3';
 
 const assetsToCache = [
   'https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.indigo-pink.min.css',
@@ -6,7 +6,7 @@ const assetsToCache = [
   'https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2',
   'https://fonts.googleapis.com/css?family=Roboto:400,700',
   'https://fonts.googleapis.com/icon?family=Material+Icons',
-  './assets/images/pwa-logo.png',
+  './assets/images/imagem.png',
   './assets/icons/icon-48x48.png',
   './assets/icons/icon-96x96.png',
   './assets/icons/icon-144x144.png',
