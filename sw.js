@@ -18,6 +18,7 @@ const assetsToCache = [
   './manifest.json',
   './favicon.ico',
   './index.html',
+  './sobre.html',
   '/'
 ];
 
