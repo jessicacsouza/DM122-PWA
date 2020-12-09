@@ -1,3 +1,3 @@
-# PWA - Vanilla JS
+# Fast Products
 
-An example of PWA with Vanilla JS
+Qualquer produto entregue quando e onde quiser

@@ -1,7 +1,7 @@
 {
-  "name": "PWA - Vanilla JS",
-  "short_name": "PWA - VJS",
-  "theme_color": "#3f51b5",
+  "name": "Fast Products",
+  "short_name": "FastProducts",
+  "theme_color": "#960f08",
   "background_color": "#fff",
   "display": "standalone",
   "scope": ".",

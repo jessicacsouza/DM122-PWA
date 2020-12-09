@@ -1,4 +1,4 @@
-const cacheName = 'fast-products-v1';
+const cacheName = 'fast-products-v2';
 
 const assetsToCache = [
   'https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.indigo-pink.min.css',
@@ -16,8 +16,8 @@ const assetsToCache = [
   './assets/css/style.css',
   './assets/js/app.js',
   './manifest.json',
-  'favicon.ico',
-  'index.html',
+  './favicon.ico',
+  './index.html',
   '/'
 ];
 
