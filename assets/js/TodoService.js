@@ -10,16 +10,16 @@ export default class TodoService {
   initializeDB() {
     db = new Dexie("todoDB");
 
-    db.version(1).stores({
-      tasks: "++id,description,marca",
+    db.version(2).stores({
+      tasks: "++id,description,marca,quantidade,endereco",
     });
 
     db.on("populate", async () => {
       await db.tasks.bulkPut([
-        { description: "Learn JavaScript", marca : "Teste", done: true },
-        { description: "Learn TypeScript", marca : "Teste", done: false },
-        { description: "Learn PWA", marca : "Teste", done: false },
-        { description: "Learn HTML5 APIs", marca : "Teste", done: false },
+        { description: "Shampoo", marca : "Haskel", quantidade: 1, endereco: "Rua João, 175, Centro", done: false },
+        { description: "Condicionador", marca : "Haskel", quantidade: 1, endereco: "Rua João, 175, Centro", done: false },
+        { description: "Máscara", marca : "Haskel", quantidade: 1, endereco: "Rua João, 175, Centro", done: false },
+        { description: "Leave-in Anti-Frizz", marca : "Haskel", quantidade: 1, endereco: "Rua João, 175, Centro", done: false },
       ]);
     });
 

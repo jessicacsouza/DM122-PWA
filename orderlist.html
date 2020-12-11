@@ -20,7 +20,7 @@
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
-          <span class="mdl-layout-title">Novo pedido</span>
+          <span class="mdl-layout-title">Meus pedidos</span>
         </div>
       </header>
 
@@ -30,7 +30,7 @@
           <a class="mdl-navigation__link" href="./index.html">Página inicial</a>
         </nav>
         <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="./orderlist.html">Meus pedidos</a>
+          <a class="mdl-navigation__link" href="./pedido.html">Realizar pedido</a>
         </nav>
         <nav class="mdl-navigation">
           <a class="mdl-navigation__link" href="./sobre.html">Sobre</a>
@@ -39,25 +39,12 @@
 
       <main class="mdl-layout__content mat-typography" style="text-align: center">
         <form> 
-          <div style="margin: 0.5%; text-align: start;" class="w-25 mx-auto"><label id="input">Nome do produto:</label></div>
-          <input type="text" name="nome" placeholder="Nome do produto" autofocus="" required="" autocomplete="off">
-
-          <div style="margin: 0.5%; text-align: start;" class="w-25 mx-auto"><label id="input">Marca do produto:</label></div>
-          <input type="text" name="marca" placeholder="Marca do produto" autofocus="" required="" autocomplete="off">
-
-          <div style="margin: 0.5%; text-align: start;" class="w-25 mx-auto"><label id="input">Quantidade:</label></div>
-          <input type="number" name="quantidade" placeholder="Ex: 3" autofocus="" required="" autocomplete="off">
-
-          <div style="margin: 0.5%; text-align: start;" class="w-25 mx-auto"><label id="input">Endereço (Rua, Número, Bairro):</label></div>
-          <input type="text" name="endereco" placeholder="Ex: Rua João, 175, Centro" autofocus="" required="" autocomplete="off">
-          
-          <button>Cadastrar pedido</button>
         </form>
         <ul></ul>
       </main>
     </div>
   </div>
   <script defer src="assets/js/material.min.js"></script>
-  <script type="module" src="assets/js/NovoPedido.js"></script>
+  <script type="module" src="assets/js/OrderList.js"></script>
 </body>
 </html>

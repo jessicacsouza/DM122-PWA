@@ -4,21 +4,22 @@ export default class HtmlService {
     constructor(todoService) {
       this.todoService = todoService;
       this.bindFormEvent();
+      this.listTasks();
     }
   
     bindFormEvent() {
       const form = document.querySelector("form");
       form.addEventListener("submit", (event) => {
         event.preventDefault();
-        this.addTask(form.nome.value, form.marca.value, form.quantidade.value, form.endereco.value);
+        this.addTask(form.nome.value, form.marca.value);
         form.reset();
         form.nome.focus();
         form.marca.focus();
       });
     }
   
-    async addTask(description, marca, quantidade, endereco) {
-      const task = { description, marca, quantidade, endereco, done: false };
+    async addTask(description, marca) {
+      const task = { description, marca, done: false };
       const taskId = await this.todoService.save(task);
       task.id = taskId;
       this.addToHtmlList(task);
@@ -35,12 +36,15 @@ export default class HtmlService {
         li.remove();
     }
 
-    toogleTask(li) {
+    toogleTask(li, span, task, button2) {
         const taskId = this.getTaskId(li);
         li.classList.toggle(doneCssClass);
         const isDone = li.classList.contains(doneCssClass);
-        this.saveTask(taskId, isDone);
+        if (isDone == true) {
+          span.textContent = task.description + " (pedido cancelado)";
+        }
 
+        this.saveTask(taskId, isDone);
     }
 
     async saveTask(taskId, isDone) {
@@ -54,16 +58,34 @@ export default class HtmlService {
     }  
 
     addToHtmlList(task) {
+      const ul = document.querySelector("ul");
       const li = document.createElement("li");
       const span = document.createElement("span");
+      const button = document.createElement("button");
+      const button2 = document.createElement("button");
+
+      span.textContent = task.description;
 
       li.setAttribute("data-item-id", task.id);
-      li.addEventListener('click', () => this.toogleTask(li));
+
+      button2.textContent = "Cancelar pedido";
+      button2.addEventListener("click", (event) => {
+        this.toogleTask(li, span, task, button2);
+      });
+
+      button.textContent = "x";
+      button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          this.deleteTask(li);
+      });
 
       if (task.done) {
         li.classList.add(doneCssClass);
       }
   
       li.appendChild(span);
+      li.appendChild(button2);
+      li.appendChild(button);
+      ul.appendChild(li);
     }
   }
