@@ -10,7 +10,7 @@ export default class TodoService {
   initializeDB() {
     db = new Dexie("todoDB");
 
-    db.version(2).stores({
+    db.version(3).stores({
       tasks: "++id,description,marca,quantidade,endereco",
     });
 

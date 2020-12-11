@@ -42,6 +42,8 @@ export default class HtmlService {
         const isDone = li.classList.contains(doneCssClass);
         if (isDone == true) {
           span.textContent = task.description + " (pedido cancelado)";
+          button2.style.color = "transparent";
+          button2.innerHTML = '<span class="no-click"></span>';
         }
 
         this.saveTask(taskId, isDone);
@@ -49,6 +51,9 @@ export default class HtmlService {
 
     async saveTask(taskId, isDone) {
         const task = await this.todoService.get(taskId);
+        if (isDone == true) {
+           task.description = task.description + " (pedido cancelado)"
+        }
         task.done = isDone;
         await this.todoService.save(task)
     }
@@ -63,17 +68,37 @@ export default class HtmlService {
       const span = document.createElement("span");
       const button = document.createElement("button");
       const button2 = document.createElement("button");
+      
+      const tabela = document.getElementById("table");
 
-      span.textContent = task.description;
+      var linha   = tabela.insertRow(-1);
+
+      var coluna1 = linha.insertCell(0);
+      var coluna2 = linha.insertCell(1);
+      var coluna3 = linha.insertCell(2);
+      var coluna4 = linha.insertCell(3);
+      var coluna5 = linha.insertCell(4);
+      var coluna6 = linha.insertCell(5);
+
+      coluna1.innerHTML = task.description;
+      coluna2.innerHTML = task.marca;
+      coluna3.innerHTML = task.quantidade;
+      coluna4.innerHTML = task.endereco;
+      coluna5.innerHTML = '<span class="material-icons">cancel</span>';
+      coluna6.innerHTML = '<span class="material-icons">delete</span>';
+
+     // span.textContent = task.description + " " + task.marca + " " + task.quantidade + " " + task.endereco;
 
       li.setAttribute("data-item-id", task.id);
 
-      button2.textContent = "Cancelar pedido";
+      button2.innerHTML = '<span class="material-icons">cancel</span>';
+      button2.style.color = '#a60a05';
       button2.addEventListener("click", (event) => {
         this.toogleTask(li, span, task, button2);
       });
 
-      button.textContent = "x";
+      button.innerHTML = '<span class="material-icons">delete</span>';
+      button.style.color = '#915856';
       button.addEventListener("click", (event) => {
           event.stopPropagation();
           this.deleteTask(li);
@@ -84,7 +109,11 @@ export default class HtmlService {
       }
   
       li.appendChild(span);
-      li.appendChild(button2);
+      
+      if (task.done == false) {
+        li.appendChild(button2); 
+      }
+
       li.appendChild(button);
       ul.appendChild(li);
     }
