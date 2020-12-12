@@ -3,26 +3,7 @@ const doneCssClass = 'done';
 export default class OrderService {
     constructor(todoService) {
       this.todoService = todoService;
-      this.bindFormEvent();
       this.listTasks();
-    }
-  
-    bindFormEvent() {
-      const form = document.querySelector("form");
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        this.addTask(form.nome.value, form.marca.value);
-        form.reset();
-        form.nome.focus();
-        form.marca.focus();
-      });
-    }
-  
-    async addTask(description, marca) {
-      const task = { description, marca, done: false };
-      const taskId = await this.todoService.save(task);
-      task.id = taskId;
-      this.addToHtmlList(task);
     }
   
     async listTasks() {

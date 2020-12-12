@@ -4,7 +4,7 @@ import { set as setItem, get as getItem, keys as getKeys }
 import HtmlService from './HtmlService.js';    
 import TodoService from './TodoService.js';
 
-class NovoPedido {
+class NewOrder {
     constructor() {
         console.log("Initialized");
 
@@ -12,4 +12,4 @@ class NovoPedido {
     }
 }
 
-new NovoPedido();
+new NewOrder();

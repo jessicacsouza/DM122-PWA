@@ -16,7 +16,7 @@ const assetsToCache = [
   './assets/js/material.min.js',
   './assets/css/style.css',
   './assets/js/app.js',
-  './assets/js/NovoPedido.js',
+  './assets/js/NewOrder.js',
   './assets/js/OrderList.js',
   './assets/js/OrderService.js',
   './assets/js/HtmlService.js',
@@ -26,7 +26,7 @@ const assetsToCache = [
   './index.html',
   './orderlist.html',
   './sobre.html',
-  './pedido.html',
+  './order.html',
   '/'
 ];
 
