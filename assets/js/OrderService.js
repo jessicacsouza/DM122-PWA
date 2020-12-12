@@ -1,6 +1,6 @@
 const doneCssClass = 'done';
 
-export default class HtmlService {
+export default class OrderService {
     constructor(todoService) {
       this.todoService = todoService;
       this.bindFormEvent();
@@ -30,23 +30,15 @@ export default class HtmlService {
       tasks.forEach((task) => this.addToHtmlList(task));
     }
   
-    async deleteTask(li) {
-        const taskId = this.getTaskId(li);
+    async deleteTask(task, linha) {
+        const taskId = task.id;
         await this.todoService.delete(taskId);
-        li.remove();
+        linha.remove();
     }
 
-    toogleTask(li, span, task, button2) {
-        const taskId = this.getTaskId(li);
-        li.classList.toggle(doneCssClass);
-        const isDone = li.classList.contains(doneCssClass);
-        if (isDone == true) {
-          span.textContent = task.description + " (pedido cancelado)";
-          button2.style.color = "transparent";
-          button2.innerHTML = '<span class="no-click"></span>';
-        }
-
-        this.saveTask(taskId, isDone);
+    toogleTask(task) {
+        const taskId = task.id;
+        this.saveTask(taskId, task.done);
     }
 
     async saveTask(taskId, isDone) {
@@ -58,63 +50,48 @@ export default class HtmlService {
         await this.todoService.save(task)
     }
 
-    getTaskId(li) {
-        return +li.getAttribute("data-item-id");
-    }  
-
     addToHtmlList(task) {
       const ul = document.querySelector("ul");
-      const li = document.createElement("li");
-      const span = document.createElement("span");
-      const button = document.createElement("button");
-      const button2 = document.createElement("button");
+      const buttonDelete = document.createElement("button");
+      const buttonCancel = document.createElement("button");
       
       const tabela = document.getElementById("table");
 
       var linha   = tabela.insertRow(-1);
 
-      var coluna1 = linha.insertCell(0);
-      var coluna2 = linha.insertCell(1);
-      var coluna3 = linha.insertCell(2);
-      var coluna4 = linha.insertCell(3);
-      var coluna5 = linha.insertCell(4);
-      var coluna6 = linha.insertCell(5);
+      var columnProductName = linha.insertCell(0);
+      var columnBrand = linha.insertCell(1);
+      var columnQuantity = linha.insertCell(2);
+      var columnAddress = linha.insertCell(3);
+      var columnCancel = linha.insertCell(4);
+      var columnDelete = linha.insertCell(5);
 
-      coluna1.innerHTML = task.description;
-      coluna2.innerHTML = task.marca;
-      coluna3.innerHTML = task.quantidade;
-      coluna4.innerHTML = task.endereco;
-      coluna5.innerHTML = '<span class="material-icons">cancel</span>';
-      coluna6.innerHTML = '<span class="material-icons">delete</span>';
+      columnProductName.innerHTML = task.description;
+      columnBrand.innerHTML = task.marca;
+      columnQuantity.innerHTML = task.quantidade;
+      columnAddress.innerHTML = task.endereco;
 
-     // span.textContent = task.description + " " + task.marca + " " + task.quantidade + " " + task.endereco;
-
-      li.setAttribute("data-item-id", task.id);
-
-      button2.innerHTML = '<span class="material-icons">cancel</span>';
-      button2.style.color = '#a60a05';
-      button2.addEventListener("click", (event) => {
-        this.toogleTask(li, span, task, button2);
+      buttonCancel.innerHTML = '<span class="material-icons">cancel</span>';
+      buttonCancel.style.color = '#a60a05';
+      buttonCancel.addEventListener("click", (event) => {
+        task.done = true;
+        buttonCancel.remove();
+        columnProductName.innerHTML = task.description + " (pedido cancelado)";
+        this.toogleTask(task);
       });
 
-      button.innerHTML = '<span class="material-icons">delete</span>';
-      button.style.color = '#915856';
-      button.addEventListener("click", (event) => {
+      buttonDelete.innerHTML = '<span class="material-icons">delete</span>';
+      buttonDelete.style.color = '#915856';
+      buttonDelete.addEventListener("click", (event) => {
           event.stopPropagation();
-          this.deleteTask(li);
+          this.deleteTask(task, linha);
       });
-
-      if (task.done) {
-        li.classList.add(doneCssClass);
-      }
-  
-      li.appendChild(span);
-      
+    
       if (task.done == false) {
-        li.appendChild(button2); 
+        columnCancel.appendChild(buttonCancel); 
       }
 
-      li.appendChild(button);
-      ul.appendChild(li);
+      columnDelete.appendChild(buttonDelete);
+      ul.appendChild(tabela);
     }
   }
