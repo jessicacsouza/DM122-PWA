@@ -27,7 +27,7 @@ const assetsToCache = [
   './orderlist.html',
   './sobre.html',
   './order.html',
-  '/'
+  './'
 ];
 
 function removeOldCache(key) {
